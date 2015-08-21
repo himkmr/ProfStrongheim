@@ -75,11 +75,11 @@ public class MyServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String id = request.getParameter("id");
 		String assignment = request.getParameter("assignment");
-		String type = request.getParameter("type");
+		String type = request.getParameter("ass_type");
 		String date = request.getParameter("date");
 		String grade = request.getParameter("grade");
-		
-		String query = "insert into student_records values("+id+",'"+name+"','"+assignment+"','"+type+"',"+"To_Date('"+date+"','mm/dd/yy')"+","+grade+")";
+		String cls = request.getParameter("class_name");
+		String query = "insert into student_records values("+id+",'"+name+"','"+assignment+"','"+type+"',"+"To_Date('"+date+"','mm/dd/yy')"+","+grade+",'"+cls+"')";
 		System.out.println(query);
 		PreparedStatement preStatement;
 		try {

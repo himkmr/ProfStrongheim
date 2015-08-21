@@ -78,13 +78,67 @@ public class Students extends HttpServlet {
 		try {
 			preStatement = conn.prepareStatement(query);
 			rst = preStatement.executeQuery();
-			message += "<tr><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">Name"
-					+ "</td></tr>";
+			
+			
+			//get student records for each class
 			while (rst.next()) {
 				String name = rst.getString("name");
-				message += "<td style=\"padding:15px;border:2px solid green;background-color: #D8D8D8; \">"
+				message += "<tr><td style=\"padding:15px;border:2px solid green;background-color: #D8D8D8; \">"
 						+ "<a href =\"GetByName?pname=" +name +"\">"
-						+ name + "</tr>";
+						+ name + "</tr><td></td><td></td>";
+				
+
+				message += "<b><tr><td style=\"padding:15px; border: 2px solid green; background-color: #F2F2F2; \">Class"+
+						"</td>";
+				message += "<td style=\"padding:15px; border: 2px solid green; background-color: #F2F2F2; \">Assignment Name"+
+						"</td>";
+				message += "<td style=\"padding:15px; border: 2px solid green; background-color: #F2F2F2; \">Assignment Type"+
+						"</td>";
+				message += "<td style=\"padding:15px; border: 2px solid green; background-color: #F2F2F2; \">Date"+
+						"</td>";
+				message += "<td style=\"padding:15px; border: 2px solid green; background-color: #F2F2F2; \">Grade"+
+						"</td></tr></b>";
+				
+				
+				
+				String query_student  = "select distinct class from student_records where name="+"'"+name+"'";
+				PreparedStatement ps2 = conn.prepareStatement(query_student);
+				ResultSet rst2 = ps2.executeQuery();
+				while(rst2!=null && rst2.next())
+				{
+					String cls = rst2.getString("class");
+					String query_assigns  = "select * from student_records where name="+"'"+name+"' and class='"+cls+"'";
+					System.out.println(query_assigns);
+					PreparedStatement ps3 = conn.prepareStatement(query_assigns);
+					ResultSet rst3 = ps3.executeQuery();
+								
+					
+					while(rst3!=null && rst3.next())
+					{
+							String ass_name = rst3.getString("assign_name");
+							String grade = rst3.getString("grade");
+							String class_name = rst3.getString("class");
+							String dt = rst3.getString("dt");
+							String ass_tp = rst3.getString("assign_type");
+							
+							
+							
+							message += "<tr><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">"
+									+class_name+ "</td>";
+							message += "<td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">"
+									+ass_name+ "</td>";
+							message += "<td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">"
+									+ass_tp+ "</td>";
+							message += "<td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">"
+									+dt+ "</td>";
+							message += "<td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">"
+									+grade+ "</td></tr>";
+					}
+													
+				}
+				
+					
+				
 			}
 
 		} catch (SQLException e) {
@@ -99,5 +153,6 @@ public class Students extends HttpServlet {
 				request, response);
 
 	}
+	
 
 }

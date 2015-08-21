@@ -70,9 +70,25 @@ public class GetAverageByType extends HttpServlet {
 		}
 		String name_para = request.getParameter("ptype");
 		String query = "Select grade from student_records where assign_type='"+name_para +"'";
-//		/System.out.println(query);
+		String grade_factor = "Select "+ name_para+" from weight_table";
+		//System.out.println(grade_factor);
 		PreparedStatement preStatement;
 		ResultSet rst = null;
+		PreparedStatement ps2 = null;
+		ResultSet rst2 = null;
+		String g_factor_s=null;
+		try {
+			ps2 = conn.prepareStatement(grade_factor);
+		
+		rst2 = ps2.executeQuery();
+		rst2.next();
+	
+		g_factor_s= rst2.getString(name_para);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		double g_factor_d = Double.parseDouble(g_factor_s);
 		String message ="<div align=\"center\"><table style=\"border:5px; solid black;\">";
 		try {
 			preStatement = conn.prepareStatement(query);
@@ -82,7 +98,7 @@ public class GetAverageByType extends HttpServlet {
 			while(rst.next())
 			{
 
-				total += Double.parseDouble(rst.getString("grade"));
+				total += Double.parseDouble(rst.getString("grade"))*g_factor_d/100;
 				count++;
 			}
 			double average =total/count;

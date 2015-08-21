@@ -80,10 +80,12 @@ public class History extends HttpServlet {
 			
 			message+="<tr><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">"
 					+ "ID</td><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \"> Name "
-					+ "</td><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \"> Assignment </td>"
+					+ "</td><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \"> Class </td>+"
+					+ "</td><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \"> Assignment Name </td>"
 					+ "<td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \"> Assignment Type"
 					+ " </td><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \"> Date "
-					+ "</td><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \"> Grades </td></tr>";
+					+ "</td><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \"> Grades </td>"
+					+ "</tr>";
 			
 			while(rst.next())
 			{
@@ -93,12 +95,15 @@ public class History extends HttpServlet {
 				String type = rst.getString("assign_type");
 				String date = rst.getString("dt");
 				String grade = rst.getString("grade");
+				String cls = rst.getString("class");
 				
 				
 				message+="<tr><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">"
 						+id +
 				"</td><td style=\"padding:15px;border:2px solid green;background-color: #D8D8D8; \"><a href =\"GetByName?pname=" +name +"\">"+
-				name+"</td>"
+				name+"</td>"+
+						"</td><td style=\"padding:15px;border:2px solid green;background-color: #D8D8D8; \">"+
+						cls+"</td>"
 						+"<td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">"
 								+assignment +
 								"</td><td style=\"padding:15px;border:2px solid green;background-color: #D8D8D8; \"><a href =\"GetByType?ptype=" +type +"\">"+

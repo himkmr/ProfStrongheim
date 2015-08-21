@@ -25,6 +25,7 @@
 <li><a href="History">HISTORY</a></li>
 <li><a href="Average">AVERAGE</a></li>
 <li><a href="Students">STUDENTS</a></li>
+<li><a href="Grades">GRADES</a></li>
 </ul></div>
 </div>
 </nav><div style="text-align:center">

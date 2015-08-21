@@ -112,6 +112,32 @@ public class Average extends HttpServlet {
 			e.printStackTrace();
 		}
 		
+		
+		query = "Select distinct class from student_records";
+		message=message+"</table></div>";
+		message += "<div style=\"position: absolute;left: 350px;\"><table style=\"border:5px; solid black;\">";
+		message=message+"</tr><td>Classes</td></tr>";
+		try {
+			preStatement = conn.prepareStatement(query);
+			rst = preStatement.executeQuery();
+
+			while (rst.next()) {
+				String cls =rst.getString("class");
+				message+="<tr><td style=\"padding:15px; border: 2px solid green; background-color: ##F2F2F2; \">"
+						+ "<a href =\"GetAverageByClass?pclass="+cls +"\">"
+						+cls+"</td>";
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
 				
 		message=message+"</table></div>";
 		response.setContentType("text/html");

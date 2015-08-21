@@ -10,26 +10,23 @@
 <script
 	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script>
-function myFunction() {
-    var txt = "";
-	var gradeNum = document.getElementById("grade").value;
-	if(isNaN(gradeNum))
-    {
-		  txt = "Invalid";
-	       alert(txt);
-	       return false;
-    }
-    else if (document.getElementById("grade").validity.rangeUnderflow) {
-       txt = "Value too small";
-       alert(txt);
-       return false;
-    }
-    else if (document.getElementById("grade").validity.rangeOverrflow) {
-        txt = "Value too Large";
-        alert(txt);
-        return false;
-     }
-}
+	function myFunction() {
+		var txt = "";
+		var gradeNum = document.getElementById("grade").value;
+		if (isNaN(gradeNum)) {
+			txt = "Invalid";
+			alert(txt);
+			return false;
+		} else if (document.getElementById("grade").validity.rangeUnderflow) {
+			txt = "Value too small";
+			alert(txt);
+			return false;
+		} else if (document.getElementById("grade").validity.rangeOverrflow) {
+			txt = "Value too Large";
+			alert(txt);
+			return false;
+		}
+	}
 </script>
 
 <title>Home</title>
@@ -53,6 +50,7 @@ function myFunction() {
 					<li><a href="History">HISTORY</a></li>
 					<li><a href="Average">AVERAGE</a></li>
 					<li><a href="Students">STUDENTS</a></li>
+					<li><a href="Grades">GRADES</a></li>
 				</ul>
 			</div>
 		</div>
@@ -61,13 +59,23 @@ function myFunction() {
 
 		<h2>Prof. Strongheim's Grade Book</h2>
 		<form action="MyServlet" onSubmit=" return myFunction()">
-			Student id:<br> <input type="text" name="id"  required> <br>
-			Name:<br> <input type="text" name="name"  required> <br>
-			Assignment:<br> <input type="text" name="assignment"  required> <br>
-			Assignment Type:<br> <input type="text" name="type"  required> <br>
-			Date(mm/dd/yy):<br> <input type="text" name="date"  required> <br>
-			Grades:<br> <input type="number" id="grade" name="grade"  min ="0" max="100" required> <br>
-			<input type="Submit" value="Submit">
+			Student id:<br> <input type="text" name="id" required> <br>
+			Name:<br> <input type="text" name="name" required> <br>
+			Assignment:<br> <input type="text" name="assignment" required>
+			 <br> Class: <br><select name="class_name" style="width: 160px; height:25px">
+				<option value="phy" selected>Physics</option>
+				<option value="sci">Earth Science</option>
+				<option value="math">Mathematics</option>
+				 </select><br> 
+				Date(mm/dd/yy):<br> <input
+				type="text" name="date" required> <br> Grades:<br>
+				<input type="number" id="grade" name="grade" min="0" max="100"
+				required> <br> Assignment Type:<br> <select name="ass_type" style="width: 160px; height:25px">
+				<option value="class" selected style="width: 160px; height:25px">Class</option>
+				<option value="home">Home</option>
+				<option value="quiz">Quiz</option>
+				<option value="project">Project</option>
+			</select><br> <input type="Submit" value="Submit">
 		</form>
 		<p id="demo"></p>
 	</div>
